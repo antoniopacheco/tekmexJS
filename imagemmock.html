@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf8">
+</head>
+<body>
+<canvas id="myCanvas"></canvas>
+<p>
+Create a custom object that will hold an image’s mock information such as pixel color data, image size, and name. It must be able to return the information.</p>
+<p>
+	Example: <br/>
+		var data = new Array (1600); // 40 x 40 px dummy image data<br/>
+		var img = new Image (data, 40, 40, ‘myImage’);<br/>
+		img.width; // 40<br/>
+		img.height; // 40<br/>
+		img.name; // ‘myImage’<br/>
+		img.pixelData (20, 4); // returns the color of the pixel at that <br/>position. <br/>
+	Estimated Time: 30 min.<br/>
+</p>
+<script type="text/javascript">
+	function Image(data,width, height,name){
+		this.data = data;
+		this.width = width;
+		this.height = height;
+		this.name = name;
+		this.pixelData = function(x,y){
+			return data.getImageData(x,y,1,1).data;
+		}
+
+	}
+	//var data = new Array (1600);
+		var example = document.getElementById('myCanvas');
+		var context = example.getContext('2d');
+		context.fillStyle = "#FF0000";
+		context.fillRect(0,0,150,75);
+		var img = new Image (context, 150, 75, 'myImage');
+		console.log(img.pixelData(40,40));
+</script>
+</body>
+</html>
