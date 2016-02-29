@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<p>
+	Create a function that will return the addition of N numbers.
+		Example:
+			var answer = add (1, 2) + add ( 1, 4, 6, 7, 2);
+	Dynamic argument list handling with JS
+	Estimated Time: 10 min<.
+</p>
+	<script type="text/javascript">
+		var answer = add (1, 2) + add ( 1, 4, 6, 7, 2);
+		console.log(answer);
+		function add(){
+			res = 0;
+			for(var i =0; i<arguments.length; i++)
+				res += arguments[i];
+			return res;
+		}
+	</script>
+</body>
+</html>
