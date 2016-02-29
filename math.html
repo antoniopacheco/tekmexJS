@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<p>
+Create an object that will hold methods for adding, multiplying, and factorial operations.
+Example:
+var a = myMath.add (1, 2, 3); //6
+var b = myMath.mul (1, 2, 3); // 6
+var c = myMath.fact (	3); // 6
+	Use of anonymous functions and functions as object properties (methods.) 
+Estimated Time: 15 min<.
+</p>
+<script type="text/javascript">
+	var MyMath = {
+		add: function(){
+			res = 0;
+			for(var i =0; i<arguments.length; i++)
+				res += arguments[i];
+			return res;
+		},
+		mul: function(){
+			res=1;
+			for(var i =0; i<arguments.length; i++)
+				res *= arguments[i];
+			return res;
+		},
+		fact: function(number){
+			var f = [];
+			return function factorial(n) {
+			  if (n == 0 || n == 1)
+			    return 1;
+			  if (f[n] > 0)
+			    return f[n];
+			  return f[n] = factorial(n-1) * n;
+			}(number);
+		}
+
+	}
+	var a = MyMath.fact(3);
+	console.log(a);
+</script>
+</body>
+</html>
