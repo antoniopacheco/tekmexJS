@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Array Sort</title>
+</head>
+<body>
+<p>
+Given an array of words, write a function that will sort the array in ascending order. It should also take an optional argument that can customize the sorting order. Custom sorting orders:
+	<ol>
+	<li>descending</li>
+	<li>sort by length ascending/descending</li>
+	<li>sort by number of consonants ascending/descending.</li>
+	</ol>
+</p>
+<ul id="results">
+</ul>
+<script type="text/javascript">
+	results = document.getElementById("results");
+	var myarray = ["Hi","Howe","Aree","Hello","Testese","Bestest"];
+	res = customSort(myarray,3,0);
+	for (var i = 0; i < res.length; i++) {
+		var li = document.createElement("li");
+		li.appendChild(document.createTextNode(res[i]));
+		results.appendChild(li);
+	}
+	function vowelCount(string){
+  		var vowels = 'aeiouAEIOU';  
+  		var count = 0;  
+		for(var x = 0; x < string.length ; x++){  
+    		if (vowels.indexOf(string[x]) !== -1)
+    			count++;   
+  		}  
+  		return count;  
+	}
+
+	function consonantCount(string){
+		return string.length - vowelCount(string);
+	}
+	function customSort(array,type,ascending){
+		/*
+		Array = array to sort
+		Type (optional) type of ordering:
+			0(default):ascending 
+			1:descending
+			2:sort by length
+			3:sort by number of consonants
+		ascending (optional) - only for type 2 and 3
+			0(default):descending
+			1:ascending
+		*/
+		if(type === undefined)
+			type = 0;
+		switch (type){
+			case 0:
+				return array.sort();
+			case 1:
+				return array.sort().reverse();
+			break
+			case 2: //length 
+				return array.sort(function(a,b){
+					if(ascending)
+						return a.length - b.length;
+					else
+						return b.length - a.length;
+				});
+			break;
+			case 3:
+				return array.sort(function(a,b){
+					if(ascending)
+						return consonantCount(a) - consonantCount(b);
+					else
+						return consonantCount(b) - consonantCount(a);
+				});
+			break;	
+		}
+	}
+
+
+</script>
+</body>
+</html>
