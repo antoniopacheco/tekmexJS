@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Data types</title>
+</head>
+<body>
+
+<p>
+Write a function that will accept any number of arguments and print out their data type.
+	Example:
+	dataType (1, 6.2831, “pi*2”, [function(){}, 1], {}, function () {}); 
+	// number, float, string, array, object, function
+	Variable argument functions & data types
+	Estimated Time: 2 hr
+	</p>
+	<ul id="results">
+</ul>
+	<script type="text/javascript">
+		function dataType(){
+			results = document.getElementById("results");
+			for(var i =0; i<arguments.length; i++){
+				var li = document.createElement("li");
+				if(typeof arguments[i] == 'number' ){
+					console.log(arguments[i].constructor);
+					var type = (!isNaN(arguments[i]) && arguments[i].toString().indexOf('.') != -1)? 'Float' : 'Number';
+					li.appendChild(document.createTextNode(type));
+				}else if(typeof arguments[i] == 'object'){
+					// console.log(arguments[i].constructor);
+					var type = arguments[i].constructor === Array ? 'Array':'Object';
+					li.appendChild(document.createTextNode(type));
+
+				}else{
+					li.appendChild(document.createTextNode(typeof arguments[i]));
+				}
+				//
+				results.appendChild(li);
+
+			}
+		}
+		dataType (1, 6.2831, 'pi*2', [function(){}, 1], {}, function () {}); 
+	</script>
+</body>
+</html>
