@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<p>Create a custom object type that will hold a number value. 
+Make sure that no other data type can be assigned to that variable. 
+It must hold ONLY numbers.
+</p>
+Validation, setters & getters, private variables
+Estimated Time: 1 hr <.
+
+<script type="text/javascript">
+	function myObject(){
+		var value=0;
+		this.setValue = function(a){
+			if (typeof a === 'number')
+				value = a;
+		}
+		this.getValue = function(){
+			return value;
+		}
+	}
+	var atr = new myObject;
+	atr.setValue('1');
+	console.log(atr.getValue());
+
+</script>
+</body>
+</html>
