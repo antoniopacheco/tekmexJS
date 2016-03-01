@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<p>
+Write a function that will calculate the distance between two points. The function should be able to handle 2D and 3D points. 
+	Example:
+	var x1 = 1, y1 = 2, z1 = 1;
+	var x2 = 2, y2 = 2, z2 = 4;
+	var delta1 = distance (x1, y1, x2, y2); // delta = 1
+	var delta2 = distance (x1, y1, z1, x2, y2, z2); // delta = 3.1622…
+
+	distance (x1, x2); // should throw an error: Insufficient parameters
+Function overloading and validation
+Estimated Time: 4 hr.
+</p>
+<script type="text/javascript">
+	function distance(){
+		switch(arguments.length){
+			case 4:
+				if(typeof arguments[0] != 'number' || typeof arguments[1] != 'number' || typeof arguments[2] != 'number' || typeof arguments[3] != 'number')
+					throw "Invalid Data";
+					return Math.sqrt(
+							Math.abs(
+								Math.pow(arguments[0]-arguments[2],2) +
+								Math.pow(arguments[1]-arguments[3],2)
+							)
+						);
+			
+			break;
+			case 6:
+				for(var i = 0; i < 6; i++)
+					if(typeof arguments[i] != 'number')
+						throw "Invalid Data";
+				console.log(
+								
+								(arguments[3]-arguments[0])^2
+				);
+				return Math.sqrt(
+							Math.abs(
+								Math.pow(arguments[5]-arguments[2],2) +
+								Math.pow(arguments[4]-arguments[1],2) +
+								Math.pow(arguments[3]-arguments[0],2)
+							)
+						);
+
+			break;
+			default:
+				throw "Insufficient parameters";
+			break;
+		}
+	}
+	var x1 = 1, y1 = 2, z1 = 1;
+	var x2 = 2, y2 = 2, z2 = 4;
+	var delta1 = distance (x1, y1, x2, y2); // delta = 1
+	console.log("delta 1 = " + delta1);
+	var delta2 = distance (x1, y1, z1, x2, y2, z2); // delta = 3.1622…
+	console.log("delta 2 = " + delta2);
+	</script>
+
+</body>
+</html>
