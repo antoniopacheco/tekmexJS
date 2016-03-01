@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<h1>Chapter 8</h1>
+<p>Create functions A, B, and C that execute every 30s, 1min, and 1min 15s respectively. Use only 1 timer/interval to control all three functions. 
+</p>
+	use of a central timer controller
+	Estimated Time: 30 min.
+<script type="text/javascript" src="timers.js"></script>
+<script type="text/javascript">
+	
+	timers.add(function(){
+		console.log("Function A")
+	},1000*30);
+
+	timers.add(function(){
+		console.log("Function B");
+	},1000*60);
+
+	timers.add(function(){
+		console.log("Function C");
+	},1000*75);
+	timers.start();
+</script>
+</body>
+</html>
