@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf8">
+</head>
+<body>
+<p>
+Create a function that will transform a U.S style date format into a format of a different language/region. If that date is a holidays on the target locale (language & region), it should be mentioned. Preferably, use a different language from that of the example.
+</p>
+	<b>Example:</b>
+<p>
+	English-US: 09/16/2014 → Spanish-MX: 16/09/2014 (Dia de la independencia)<br/> 
+	Spanish-MX: 1/4/2014 → English-US: 4/1/2014 (April fools day)<br/>
+	Use of regular expressions, and lookup tables<br/>
+</p>
+	Estimated Time: 1 hr.
+
+	<input type="text" id="date">
+	<button onclick="usa_to_france(); return false">USA To France</button>
+	<button onclick="france_to_usa(); return false">France to USA</button>
+	<div id="result"></div>
+<script type="text/javascript" src="us_hollidays.js"></script>
+<script type="text/javascript" src="france_hollidays.js"></script>
+<script type="text/javascript">
+	function usa_to_france(){
+
+		var date = document.getElementById("date").value;
+		var rightDate = /^[01]\d\/[0-3]\d\/[12]\d{3}$/;
+		if(rightDate.test(date)){
+			console.log("yei");
+			pairHexExp = /(\d\d)\//g;
+			var match = date.match(pairHexExp);
+			var month = match[0].substring(0, match[0].length - 1);
+			var day = match[1].substring(0, match[1].length - 1);
+			var year = date.match(/\d{4}$/)[0];
+			yearMontDay = year+'-'+month+'-'+day;
+			var FranceDate = day+'/'+month+'/'+year;
+			var holliday = '';
+			if(France_hollidays.holidays[yearMontDay] == undefined){
+				holliday = "No hollidays Found"
+			}else{
+				holliday = France_hollidays.holidays[yearMontDay][0].name;
+			}
+			document.getElementById("result").innerHTML = FranceDate+"<br>"+holliday;
+			console.log();
+			//check if has holliday
+
+		}else{
+			throw "invalid date";
+		}
+			
+	}
+
+	function france_to_usa(){
+
+		var date = document.getElementById("date").value;
+		var rightDate = /^[0-3]\d\/[01]\d\/[12]\d{3}$/;
+		if(rightDate.test(date)){
+			console.log("yei");
+			pairHexExp = /(\d\d)\//g;
+			var match = date.match(pairHexExp);
+			var month = match[1].substring(0, match[1].length - 1);
+			var day = match[0].substring(0, match[0].length - 1);
+			var year = date.match(/\d{4}$/)[0];
+			yearMontDay = year+'-'+month+'-'+day;
+			var USdate = month+'/'+day+'/'+year;
+			var holliday = '';
+			if(US_hollidays.holidays[yearMontDay] == undefined){
+				holliday = "No hollidays Found"
+			}else{
+				holliday = US_hollidays.holidays[yearMontDay][0].name;
+			}
+			document.getElementById("result").innerHTML = USdate+"<br>"+holliday;
+			console.log();
+			//check if has holliday
+
+		}else{
+			throw "invalid date";
+		}
+			
+	}
+	//console.log(US_hollidays.holidays['2016-01-07'][0].name);
+</script>
+</body>
+</html>
