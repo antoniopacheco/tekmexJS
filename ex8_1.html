@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<p>
+Create a function that will display a random sentence to the console every minute.</p>
+	Basic use of timers <br>
+Estimated Time: 10 min <. 
+<script type="text/javascript">
+	var sentence=[
+	'May I have your attention please?',
+	'Will the real Slim Shady please stand up?',
+	'I repeat',
+	"We're gonna have a problem here"
+	]
+
+	setInterval(function(){
+		console.log(sentence[Math.floor((Math.random() * 4))])
+	},1000*60);
+
+</script>
+</body>
+</html>
