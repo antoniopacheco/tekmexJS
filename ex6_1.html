@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<h1>Chapter 06</h1>
+
+<p>Create a set of object types that describe a series of related objects that may share behavior and/or attributes. Code the example and another set of classes different from the example. Add properties/methods as needed.</p>
+	<b>Example:</b>
+	Shape { pEdges, fnDisplay } <br/>
+Quadrilateral is Shape { fnArea, fnPerimeter} <br/>
+Square is Quadrilateral { }<br/>
+Triangle is Shape {fnArea, fnPerimeter}<br/>
+<p>
+Use of inheritance, prototype, and function overwriting.<br/>
+Estimated Time: 4 h.
+</p>
+<script type="text/javascript" src="subclass.js"></script>
+<script type="text/javascript" src="shapes.js"></script>
+<script type="text/javascript" src="Vehicles.js"></script>
+
+<script type="text/javascript">
+
+	var mySquare5 = new Square(5);
+	var mySquare6 = new Square(6);
+
+	console.log(mySquare5.fnArea());
+	console.log(mySquare5.fnPerimeter());
+	console.log(mySquare6.fnArea());
+	console.log(mySquare6.fnPerimeter());
+	console.log("Rectangle");
+	var myRectangle = new Rectangle(10,3);
+	console.log(myRectangle.fnArea());
+	console.log(myRectangle.fnPerimeter());
+	console.log("Triangle");
+	var Triangle = new Triangle(11,11,7.5,7);
+	console.log(Triangle.fnArea());
+	console.log(Triangle.fnPerimeter());
+
+	Triangle.fnDisplay();
+
+	celica = new Car();
+	myBike = new Bike();
+	celica.fnSetSpeed(40);
+	console.log(celica);
+	celica.fnAceleration(15);
+	console.log(celica);
+</script>
+</body>
+</html>
