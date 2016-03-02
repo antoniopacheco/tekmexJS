@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+	table, td{
+		text-align: center;
+		padding: 5px;
+		border: 1px solid #000;
+		border-collapse: collapse;
+	}
+	</style>
+</head>
+<body>
+
+<h1>Chapter 13</h1>
+
+<p>Create a 5 x 5 grid (use tables or divs.) Each element of the grid will be sequentially numbered and each element must respond to a click event by alerting its corresponding number.</p>
+	
+	Example: 2x2 grid
+	<table id="myTable">
+		
+	</table>
+	<p>Event assignment, and delegation.
+Estimated Time: 4 hr.
+</p>
+<div>ASDASDASD</div>
+<div style="background-color: blue;">ASDASDASD</div>
+<div>ASDASDASD</div>
+<div>ASDASDASD</div>
+
+<script type="text/javascript" src="eventHandler.js"></script>
+<script type="text/javascript">
+	var mt = document.getElementById('myTable');
+	for(var i =0; i<5; i++){
+		var tr = document.createElement("tr");
+		for(var j =0; j<5; j++){
+			var td = document.createElement("td");
+			td.appendChild(document.createTextNode(i*5+j));
+			tr.appendChild(td);
+		}
+		mt.appendChild(tr);
+	}
+	addEvent(window,"load",function(){
+		var elms = document.getElementsByTagName("td");
+		for(var i = 0; i < elms.length; i++){
+			(function(elem){
+				var handler = addEvent(elem, "click", function(){
+					alert(elem.innerHTML);
+				});
+			})(elms[i]);
+		}
+	});
+</script>
+</body>
+</html>
