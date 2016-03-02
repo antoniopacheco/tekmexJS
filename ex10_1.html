@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1>Chapter 10</h1>
+	Given the following code, do the following:
+simplify it by using the with statement; and
+simplify without using the with statement.
+
+var myLib = {
+	math: {
+		real: {
+			add: function (a, b){ /*code goes here*/},
+			sub: function (a, b){ /*code goes here*/},
+			mul: function (a, b){ /*code goes here*/}
+		},
+		complex: {
+				Num: function (real, img){/*code goes here*/},
+			add: function (a, b){ /*code goes here*/},
+			sub: function (a, b){ /*code goes here*/},
+			mul: function (a, b){ /*code goes here*/}
+},
+matrix: {
+	add: function (a, b){ /*code goes here*/},
+	sub: function (a, b){ /*code goes here*/},
+	mul: function (a, b){ /*code goes here*/},
+	eye: function (size){ /*code goes here*/},
+	dot: function (m, a){ /*code goes here*/},
+	times:function(a, b){ /*code goes here*/}
+}
+	}
+};
+<script type="text/javascript" src="complex.js"></script>
+
+<script type="text/javascript">
+	var myLib = {
+		math: {
+			real: {
+				add: function (a, b){ return a+b;},
+				sub: function (a, b){ return a-b;},
+				mul: function (a, b){ return a*b;}
+			},
+			complex: {
+				Num: function (real, img){
+					return new Complex(real,img);
+				},
+				add: function (a, b){ 
+					return new Complex(a.real+b.real,a.img+b.img);
+				},
+				sub: function (a, b){ 
+					return new Complex(a.real-b.real,a.img-b.img);		
+				},
+				mul: function (a, b){ 
+					return new Complex(
+						(a.real * b.real - a.img * b.img),
+						(a.real * b.img + a.img * b.real)
+					);
+				}
+			},
+			matrix: {
+				add: function (a, b){
+					if(a.length != b.length)
+						throw "not same size";
+					var res = [];
+					for(var i =0; i< a.length; i++){
+						if(a[i].length != b[i].length)
+							throw "not same size";
+						res[i] = [];
+						for(var j=0; j < a[i].length; j++){
+							if(typeof a[i][j] != 'object' &&
+								typeof b[i][j] == 'object'
+							){
+								a[i][j] = new Complex(a[i][j],0)
+								res[i][j] = new Complex(
+									a[i][j].real+
+									b[i][j].real,
+									a[i][j].img+
+									b[i][j].img);
+							}else if(typeof b[i][j] != 'object' &&
+								typeof a[i][j] == 'object'){
+								b[i][j] = new Complex(b[i][j],0);
+								res[i][j] = new Complex(
+									a[i][j].real+b[i][j].real,
+									a[i][j].img+b[i][j].img);
+
+							}else{
+								res[i][j] = a[i][j] + b[i][j];
+							}
+						}
+						return res;
+					}
+				},
+				sub: function (a, b){
+					if(a.length != b.length)
+						throw "not same size";
+					var res = [];
+					for(var i =0; i< a.length; i++){
+						if(a[i].length != b[i].length)
+							throw "not same size";
+						res[i] = [];
+						for(var j=0; j < a[i].length; j++){
+							if(typeof a[i][j] != 'object' &&
+								typeof b[i][j] == 'object'
+							){
+								a[i][j] = new Complex(a[i][j],0)
+								res[i][j] = new Complex(
+									a[i][j].real-
+									b[i][j].real,
+									a[i][j].img-
+									b[i][j].img);
+							}else if(typeof b[i][j] != 'object' &&
+								typeof a[i][j] == 'object'){
+								b[i][j] = new Complex(b[i][j],0);
+								res[i][j] = new Complex(
+									a[i][j].real-
+									b[i][j].real,
+									a[i][j].img-
+									b[i][j].img);
+
+							}else{
+								res[i][j] = a[i][j] - b[i][j];
+							}
+						}
+						return res;
+					}
+				},
+				mul: function (a, b){ /*code goes here*/},
+				eye: function (size){
+					var res = [];
+					for(i=0;i<size;i++){
+						res[i] = [];
+						for(j=0;j<size;j++){
+							res[i][j] = j==i ? 1 : 0;
+						}
+					}
+					return res;
+				},
+				dot: function (m, a){ /*code goes here*/},
+				times:function(a, b){
+
+					if(a.length != b.length){
+						return overload(a,b);
+					}
+					var res = [];
+					for(var i =0; i< a.length; i++){
+						if(a[i].length != b[i].length)
+							throw "not same size";
+						res[i] = [];
+						for(var j=0; j < a[i].length; j++){
+							if(typeof a[i][j] != 'object' &&
+								typeof b[i][j] == 'object'
+							){
+								a[i][j] = new Complex(a[i][j],0);
+								res[i][j] = new Complex(
+									(a[i][j].real * b[i][j].real - 
+										a[i][j].img * b[i][j].img),
+									(a[i][j].real * b[i][j].img +
+										a[i][j].img * b[i][j].real));
+							}else if(typeof b[i][j] != 'object' &&
+								typeof a[i][j] == 'object'){
+								b[i][j] = new Complex(b[i][j],0);
+								res[i][j] = new Complex(
+									(a[i][j].real * b[i][j].real -
+										a[i][j].img * b[i][j].img),
+									(a[i][j].real * b[i][j].img +
+										a[i][j].img * b[i][j].real));
+
+							}else{
+								res[i][j] = a[i][j] * b[i][j];
+							}
+						}
+						return res;
+					}
+
+					function overload(a,b){
+						res =[];
+						if(a.length == undefined){
+							for(var i=0; i<b.length; i++){
+								res[i]=[];
+								for(var j=0; j<b[i].length; j++){
+									if(typeof a == 'object'){
+										if(typeof b[i][j] != 'object')
+											b[i][j] = new Complex(b[i][j],0);
+										res[i][j] = new Complex(
+												(b[i][j].real * a.real - 
+													b[i][j].img * a.img),
+												(b[i][j].real * a.img + 
+													b[i][j].img * a.real)
+											);
+									}else if(typeof b[i][j] == 'object'){
+											if(typeof a != 'object')
+												a = new Complex(a,0);
+											res[i][j] = new Complex(
+												(b[i][j].real * a.real - 
+													b[i][j].img * a.img),
+												(b[i][j].real * a.img + 
+													b[i][j].img * a.real)
+											);
+									}else{
+										res[i][j] = b[i][j] * a;
+									}
+									
+								}
+							}
+						}
+						else if(b.length == undefined){
+							for(var i=0; i<a.length; i++){
+		
+								res[i]=[];
+								for(var j=0; j<a[i].length; j++){
+									if(typeof b == 'object'){
+										if(typeof a[i][j] != 'object')
+											a[i][j] = new Complex(a[i][j],0);
+										res[i][j] = new Complex(
+												(a[i][j].real * b.real - 
+													a[i][j].img * b.img),
+												(a[i][j].real * b.img + 
+													a[i][j].img * b.real)
+											);
+									}else if(typeof a[i][j] == 'object'){
+											if(typeof b != 'object')
+												b = new Complex(b,0);
+											res[i][j] = new Complex(
+												(a[i][j].real * b.real - 
+													a[i][j].img * b.img),
+												(a[i][j].real * b.img + 
+													a[i][j].img * b.real)
+											);
+									}else{
+										res[i][j] = a[i][j] * b;
+									}
+									
+								}
+							}
+						}
+						return res;
+					}					
+				}	
+			}
+		}
+	};
+
+		// console.log(
+		// 	complex.mul(
+		// 		new complex.Num(3,2),
+		// 		new complex.Num(1,4)
+		// 	)
+		// );
+
+		// console.log(
+		// 	matrix.add(
+		// 		[
+		// 			[new complex.Num(1,2) ,2],
+		// 			[3,4]
+		// 		],
+		// 		[
+		// 			[5,6],
+		// 			[7,8]
+		// 		]
+		// 	)
+		// );
+
+		// console.log(matrix.eye(4));
+		//console.log(complex.sub(new complex.Num(real.add(5,2),-3),new complex.Num(3,4)));
+	//}
+	with(myLib.math){
+		with(real){
+			var answer = sub(add(20,22),mul(2,5));
+		}
+		var ans = matrix.times(matrix.eye (4), complex.sub (new complex.Num (real.add(5,2),-3), new complex.Num (3,4)));
+		
+	}
+	var answer2;
+	var ans2;
+	(function(m){
+		(function(r){
+			answer2 = r.sub(r.add(20,22),r.mul(2,5));
+		})(m.real)
+		ans2 = m.matrix.times(m.matrix.eye (4), m.complex.sub (new m.complex.Num (m.real.add(5,2),-3), new m.complex.Num (3,4)));
+	})(myLib.math);
+
+	console.log(answer);
+	console.log(answer2);
+	console.log(ans2);
+	console.log(ans);
+</script>
+</body>
+</html>
