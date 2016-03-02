@@ -1,0 +1,48 @@
+<<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf8">
+</head>
+<body>
+<h1>Chapter 12</h1>
+<p>Given the following HTML markup, create a JS function that can print out the attributes of the DOM elements:</p>
+<xmp>
+	<div id="a" class='square' style='display:inline-block' val='something important'></div>	
+</xmp>
+	<div id="abs" class='square' style='display:inline-block' val='something important'></div>	
+
+<b>Example:</b>
+<p>
+printAttr (el, [‘id’, ‘class’, ‘style’, ‘val’]); <br>
+// should print out: <br>
+// a<br>
+// square<br>
+// display:inline-block<br>
+// something important
+</p>
+<h2>Result:</h2>
+<ul id="result">
+</ul>
+
+Use of built in JS functionality for attribute retrieval
+Estimated Time:  4 hr.
+<script type="text/javascript">
+	function printAttr(domEl,attributes){
+		res = document.getElementById("result");
+		for(var i=0; i<attributes.length; i++){
+			var li = document.createElement("li");
+			li.appendChild(
+				document.createTextNode(
+					domEl.getAttribute(attributes[i]))
+				);
+				res.appendChild(li);
+		}
+	}
+
+	var els = document.getElementById("abs");
+	printAttr(els,['id','class','style','val','none']);
+</script>
+</body>
+</html>
+
