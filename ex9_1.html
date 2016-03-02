@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf8">
+</head>
+<body>
+<h1>Chapter 9 - Ex1</h1>
+<p>Create a function that receives a parameter containing a string. The string data must be transformed into an object that can hold properties and methods.</p>
+<b>Note</b>: Some changes may be required in the string data<br>
+	<b>Example:</b><br>
+	var str = “{prop1: 42, myFn: function(a, b) { return a+b+this.prop1;}}”<br>
+
+	var obj = dataParse(str);<br>
+	Use of JSON parse, and function code evaluation<br>
+Estimated Time: 2 hr.
+<script type="text/javascript">
+	function dataParse(str){
+		try{
+			object = JSON.parse(str);
+		}catch(e){
+			try{
+				object = eval("("+str+")");
+			}catch(e){
+				throw 'Invalid Object';
+			}
+		}
+		return object;
+	}
+	var str = "{prop1: 42, myFn: function(a, b) { return a+b+this.prop1;}}";
+	var obj = dataParse(str);
+	console.log(obj.myFn(2,3));
+</script>
+</body>
+</html>
