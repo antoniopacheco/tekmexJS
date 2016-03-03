@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<h1>Chapter 13</h1>
+<h2>Exercise 2</h2>
+<form id="myform">
+	<button id="mybtn" type="button">Click Me!</button>
+	<meter value="0" min="0" max="3" id="progress"></meter>
+</form>
+<div>one</div>
+<div>one</div>
+<div>one</div>
+<script type="text/javascript" src="eventHandler.js"></script>
+<script type="text/javascript">
+	addEvent(window,"load",function(){
+		(function(){
+			var clicked = 0;
+			var button = document.getElementById("mybtn");
+			var progress = document.getElementById("progress");
+			addEvent(button,"click",function handler(e){
+				clicked++;
+				progress.value = clicked;
+				if(clicked == 3)
+					removeEvent(button,"click",handler);
+			});
+		})();
+	
+	})
+</script>
+</body>
+</html>

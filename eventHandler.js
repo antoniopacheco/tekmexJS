@@ -6,7 +6,7 @@ if(document.addEventListener){
 	this.removeEvent = function(elem, type, fn){
 		elem.removeEventListener(type,fn,false);
 	}
-}else if(document.attachEvent){ //IE MODEL
+	}else if(document.attachEvent){ //IE MODEL
 	this.addEvent = function(elem, type, fn){
 		var bound = function(){
 			return fn.apply(elem,arguments);
