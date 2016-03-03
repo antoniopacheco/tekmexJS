@@ -5,7 +5,6 @@
 	<meta charset="utf8">
 </head>
 <body>
-<canvas id="myCanvas"></canvas>
 <p>
 Create a custom object that will hold an image’s mock information such as pixel color data, image size, and name. It must be able to return the information.</p>
 <p>
@@ -20,22 +19,33 @@ Create a custom object that will hold an image’s mock information such as pixe
 </p>
 <script type="text/javascript">
 	function Image(data,width, height,name){
-		this.data = data;
+		this.data = [];
+		var z = 0;
+		for(var i = 0; i<width; i++){
+			this.data[i]=[];
+			for(var j = 0; j<height; j++){
+				this.data[i][j] = data[z];
+			}
+		}
 		this.width = width;
 		this.height = height;
 		this.name = name;
 		this.pixelData = function(x,y){
-			return data.getImageData(x,y,1,1).data;
+			return this.data[x][y].color;
 		}
-
 	}
-	//var data = new Array (1600);
-		var example = document.getElementById('myCanvas');
-		var context = example.getContext('2d');
-		context.fillStyle = "#FF0000";
-		context.fillRect(0,0,150,75);
-		var img = new Image (context, 150, 75, 'myImage');
-		console.log(img.pixelData(40,40));
+		var colors = ['red','blue','green','yellow','purple','black','white'];
+		var data = new Array (1600);
+		for(i=0; i< 1600; i++){
+			data[i] = {color: colors[Math.floor(Math.random() * colors.length)]}
+
+		}
+		var img = new Image (data, 40, 40, 'myImage');
+		console.log(img.width); // 40<br/>
+		console.log(img.height); // 40<br/>
+		console.log(img.name); // ‘myImage’<br/>
+		console.log(img.pixelData(20, 4)); //random color
+
 </script>
 </body>
 </html>
