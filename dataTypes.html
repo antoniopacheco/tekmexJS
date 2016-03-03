@@ -21,22 +21,20 @@ Write a function that will accept any number of arguments and print out their da
 			for(var i =0; i<arguments.length; i++){
 				var li = document.createElement("li");
 				if(typeof arguments[i] == 'number' ){
-					console.log(arguments[i].constructor);
 					var type = (!isNaN(arguments[i]) && arguments[i].toString().indexOf('.') != -1)? 'Float' : 'Number';
 					li.appendChild(document.createTextNode(type));
 				}else if(typeof arguments[i] == 'object'){
-					// console.log(arguments[i].constructor);
-					var type = arguments[i].constructor === Array ? 'Array':'Object';
+
+					var type = arguments[i].constructor.name;
 					li.appendChild(document.createTextNode(type));
 
 				}else{
 					li.appendChild(document.createTextNode(typeof arguments[i]));
 				}
-				//
 				results.appendChild(li);
-
 			}
 		}
+		dataType (new String("helo world"), new Number(42)); 
 		dataType (1, 6.2831, 'pi*2', [function(){}, 1], {}, function () {}); 
 	</script>
 </body>
