@@ -28,18 +28,15 @@ Estimated Time: 15 min<.
 			return res;
 		},
 		fact: function(number){
-			var f = [];
-			return function factorial(n) {
-			  if (n == 0 || n == 1)
-			    return 1;
-			  if (f[n] > 0)
-			    return f[n];
-			  return f[n] = factorial(n-1) * n;
-			}(number);
+			var ans = 1;
+			console.log(number);
+			for(var i = number; i>1 ; i --)
+				ans = ans*i;
+			return ans;
 		}
 
 	}
-	var a = MyMath.fact(3);
+	var a = MyMath.fact(4);
 	console.log(a);
 </script>
 </body>
