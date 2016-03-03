@@ -28,14 +28,14 @@ Create a custom object that will hold an image’s mock information such as pixe
 		this.pixelData = function(x,y){
 			if(x > this.width || y > this.height || x < 0 || y <0)
 				throw "Out of margin";
-			return this.data[x*width + y].color;
+			return this.data[x*width + y];
 		}
 	}
 		var colors = ['red','blue','green','yellow','purple','black','white'];
 		var data = new Array (1600);
-		for(i=0; i< data.length; i++){
-			data[i] = {color: colors[Math.floor(Math.random() * colors.length)]}
-		}
+		for(i=0; i< data.length; i++)
+			data[i] = colors[Math.floor(Math.random() * colors.length)];
+		
 		var img = new Image (data, 40, 40, 'myImage');
 		console.log(img.width); // 40<br/>
 		console.log(img.height); // 40<br/>
