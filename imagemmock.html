@@ -19,6 +19,8 @@ Create a custom object that will hold an image’s mock information such as pixe
 </p>
 <script type="text/javascript">
 	function Image(data,width, height,name){
+		if(width * height != data.length)
+			throw "Size not match";
 		this.data = [];
 		var z = 0;
 		for(var i = 0; i<width; i++){
@@ -31,12 +33,13 @@ Create a custom object that will hold an image’s mock information such as pixe
 		this.height = height;
 		this.name = name;
 		this.pixelData = function(x,y){
-			return this.data[x][y].color;
+			if(x > this.width || y > this.height || x < 0 || y <0)
+				return this.data[x][y].color;
 		}
 	}
 		var colors = ['red','blue','green','yellow','purple','black','white'];
 		var data = new Array (1600);
-		for(i=0; i< 1600; i++){
+		for(i=0; i< data.length; i++){
 			data[i] = {color: colors[Math.floor(Math.random() * colors.length)]}
 
 		}
