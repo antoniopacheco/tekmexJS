@@ -28,10 +28,13 @@ Example:
 		}
 		CustomObject.prototype.c = function () { return this.a + this.b; };
 			var obj = new CustomObject (1, 2);
-			printObjProp (obj);
+			var obj2 = {a: 1, b:2};
+			Object.prototype.c = 3;
+			printObjProp(obj2); // print abc
+			printObjProp(obj2, true); // print a,b
+			printObjProp (obj);	//print a,b,c
 			printObjProp (obj, false); // output: a, b, c
 			printObjProp (obj, true); // output: a, b
-			printObjProp (obj);
 		function printObjProp(obj,instance){
 			if(instance === undefined)
 				instance = false;
@@ -40,12 +43,10 @@ Example:
 					console.log(propertyName);
 				}
 			}else{
-				var tempObj = new obj.constructor;
-				tempObj.__proto__ = null;
-				//console.log(new obj.constructor);
-				for(var propertyName in tempObj){
-					console.log(propertyName);
-				}
+				Object.getOwnPropertyNames(obj)
+				.forEach(function(val, idx, array) {
+  					console.log(val);
+				});
 			}
 		}	
 	</script>
