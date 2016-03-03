@@ -16,36 +16,15 @@ Write a function that will calculate the distance between two points. The functi
 Function overloading and validation
 Estimated Time: 4 hr.
 </p>
+<script type="text/javascript" src="distance.js"></script>
 <script type="text/javascript">
 	function distance(){
 		switch(arguments.length){
 			case 4:
-				if(typeof arguments[0] != 'number' || typeof arguments[1] != 'number' || typeof arguments[2] != 'number' || typeof arguments[3] != 'number')
-					throw "Invalid Data";
-					return Math.sqrt(
-							Math.abs(
-								Math.pow(arguments[0]-arguments[2],2) +
-								Math.pow(arguments[1]-arguments[3],2)
-							)
-						);
-			
+				return distance2D(arguments[0],arguments[1],arguments[2],arguments[3]);
 			break;
 			case 6:
-				for(var i = 0; i < 6; i++)
-					if(typeof arguments[i] != 'number')
-						throw "Invalid Data";
-				console.log(
-								
-								(arguments[3]-arguments[0])^2
-				);
-				return Math.sqrt(
-							Math.abs(
-								Math.pow(arguments[5]-arguments[2],2) +
-								Math.pow(arguments[4]-arguments[1],2) +
-								Math.pow(arguments[3]-arguments[0],2)
-							)
-						);
-
+				return distance3D(arguments[0],arguments[1],arguments[2],arguments[3],arguments[4],arguments[5]);
 			break;
 			default:
 				throw "Insufficient parameters";
