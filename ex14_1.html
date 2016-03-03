@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+	body{
+		margin: 0;
+		font-size: 14px;
+	}
+	h1{
+		margin-top: 0;
+		margin-bottom: 0;
+		width: 100%;
+		background-color: blue;
+		color: #fff;
+		text-align: center;
+	}
+	.instructions{
+		padding: 10px;
+		width: 100%;
+	}
+	*{
+		box-sizing: border-box;
+	}
+	.gui{
+		padding: 10px;
+		float: left;
+		width: 40%;
+		border-right: 1px dotted #ccc;
+	}
+	.result{
+		padding: 10px;
+		float: left;
+		width: 60%;
+	}
+	h3{
+		text-align: center;
+	}
+	form{
+	width: 500px;
+	margin: 0 auto;
+}
+form label{
+	display: inline-block;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.form-group{
+	margin-bottom: 10px;
+}
+
+input{
+	display: block;
+	width: 100%;
+	border: 1px solid #CCC;
+	border-radius: 4px;
+}
+table{
+	border-collapse: collapse;
+}
+td{
+
+	border: 1px solid #000;
+	width: 40px; 
+	height: 40px;
+}
+	
+</style>
+</head>
+<body>
+<h1>Chapter 14</h1>
+<div class="instructions">
+	<h2>Exercise 1</h2>
+	<p>
+	Create a function that will populate a containing div with a grid of NxM size. The size must be user defined through a GUI. Every time a new size is selected, any information already on the container should be reset. 
+	</p>
+		Dom manipulation through user input<br>
+	Estimated Time: 4 hr.
+</div>
+<hr>
+
+<div class="gui">
+	<h3>GUI</h3>
+		<fieldset>
+			<legend>Size</legend>
+
+			<label for="width">Columns</label>
+			<input type="number" id="width"/>
+
+			<label for="height">Rows</label>
+			<input type="number" id="height"/>
+
+			<input type="submit" value="send" onclick="createGrid(); return false">
+		</fieldset>
+</div>
+<div class="result">
+	<h3>Result</h3>
+	<div id="grid">
+	</div>
+</div>
+<script type="text/javascript">
+	function createGrid(){
+		width = document.getElementById("width").value;
+		height = document.getElementById("height").value;
+		grid = document.getElementById("grid");
+		var fragment="<table>";
+		for(var i = 0; i< height; i++){
+			fragment += "<tr>";
+			for(var j = 0; j < width; j++){
+				fragment += "<td class='allborder'></td>"
+			}
+			fragment += "</tr>";
+		}
+		fragment += "</table>";
+		//remove previos node
+		grid.childNodes[0].remove();
+		//apendchild with fragment
+		grid.appendChild(createf(fragment), grid.childNodes[0]);
+	}
+	//create fragment
+	function createf(htmlStr) {
+	    var frag = document.createDocumentFragment(),
+	        temp = document.createElement('div');
+	    temp.innerHTML = htmlStr;
+	    while (temp.firstChild) 
+	        frag.appendChild(temp.firstChild);
+	    return frag;
+	}
+</script>
+</body>
+</html>
