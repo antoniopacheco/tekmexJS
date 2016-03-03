@@ -13,33 +13,16 @@
 	Estimated Time: 1 hr <.
 </p>
 <script type="text/javascript">
-	var arr = [ 1, 3, 5, 10];
+	var arr = [ 1, 3, 5,20];
 	var sum = addRec(arr); // 16
 	console.log(sum);
 
-
-	 function reverser (toBeReversed){
-    if (toBeReversed.length !== 0){
-      reversed.push( toBeReversed.pop() );
-      reverser( toBeReversed );
-    }
-  }
-
-	function addRec(arr){
-
-		sum = 0;
-		recursion(arr);
-		function recursion(arra){
-		    if (arra.length == 0){
-		      	return;
-		    }
-		    else {
-		     	sum += arra[0];
-		     	arra.shift();
-		     	recursion(arra);
-		    }
-		  }
-		return sum;
+	function addRec(arr,sum,count){
+		sum = typeof sum !== 'undefined' ? sum : 0;
+		count = typeof count !== 'undefined' ? count : 0;
+		count++;
+		return count > arr.length ? sum : 
+		addRec(arr,sum + arr[count-1], count);
   	}
 </script>
 </body>
