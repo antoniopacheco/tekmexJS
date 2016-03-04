@@ -1,0 +1,160 @@
+<!-- Create a simple Single Page Application (SPA) that will have two types of templates. Specifications:
+
+Template 1: should display an image on the left with a snippet of text on the right.
+
+Template 2: will display the image on the top left, and the text should wrap around the image. 
+
+Templates should be created on custom script tags
+
+fragments should be used where convenient. 
+
+The landing page should be template 1
+
+Clicking on an image or the text associated with that image should result in navigating to template 2
+
+Example:
+
+
+Use of	fragments, and dom manipulation
+Estimated Time: 8 hr. -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+	#content{
+		width: 700px;
+		margin: 0 auto;
+	}
+		.card{
+			width: 700px;
+			clear: both;
+			margin-bottom: 20px;
+		}
+		.card img{
+			float: left;
+			height: 150px;
+		}
+	
+		.card .description{
+			height: 150px;
+			overflow: hidden;
+		}
+
+		.card2{
+			width: 700px;
+			clear: both;
+		}
+
+		.card2 img{
+			float: left;
+		}
+
+		
+
+	</style>
+</head>
+<body>
+	<div id="content">
+		<article class="card" onclick="gotoInfo(this); return false">
+			<img src="img2.jpg">
+				<div class="description">
+					<h3>Item1</h3>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+				</div>
+		</article>
+
+		<article class="card" onclick="gotoInfo(this); return false" >
+			<img src="img3.jpg">
+			<div class="description">
+				<h3>Item 2</h3>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</p>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</p>
+			</div>
+		</article>
+	</div>
+	<script type="text/javascript" src="fixEvent.js"></script>
+	<script type="text/javascript" src="getData.js"></script>
+	<script type="text/javascript" src="eventHandlerTracker.js"></script>
+
+	<script type="text/javascript">
+		var articleCache = createf(content.innerHTML);
+		function createf(htmlStr) {
+		    var frag = document.createDocumentFragment(),
+		        temp = document.createElement('div');
+		    temp.innerHTML = htmlStr;
+		    while (temp.firstChild) 
+		        frag.appendChild(temp.firstChild);
+		    return frag;
+		}
+		addEvent(window,"load",function(){
+			var content = document.getElementById("content");
+			
+		});
+		function gotoInfo(art){
+			if(art.className == 'card'){
+				articleCache = createf(content.innerHTML);
+					while (content.firstChild) 
+						content.removeChild(content.firstChild);
+				art.className='card2';
+				content.appendChild(art);
+			}else{
+				while (content.firstChild) 
+						content.removeChild(content.firstChild);
+				content.appendChild(articleCache);
+			}
+		}
+		
+		// 	//setEvents();
+		// 	//function setEvents(){
+		// 		var articles = document.getElementsByTagName("article");
+		// 		for(var i = 0; i < articles.length; i++){
+		// 			(function(article){
+		// 			var handler = addEvent(article, "click", function(){
+		// 				currentClass = article.className;
+		// 				while (content.firstChild) 
+		//     					content.removeChild(content.firstChild);
+		// 				if(article.className == 'card'){
+		//     				article.className='card2';
+		// 					content.appendChild(article);
+		// 				}else{
+		// 					content.appendChild(articleCache);
+		// 					setEvents();
+		// 				}
+		// 			});
+		// 			})(articles[i]);
+		// 		}
+		// 	//}
+		// })
+	</script>
+</body>
+</html>
